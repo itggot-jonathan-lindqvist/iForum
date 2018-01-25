@@ -7,22 +7,24 @@ html lang="en"
         link rel="stylesheet" href="/iforumcss.css"
         title iForum
     body
-        nav
-            h2 iForum
-            .links
-                a href="" Home
-                a href="" My profile
-                a href="" Cat 1
-                a href="" Cat 2
-                a href="" Cat 3
-            .budgetfix
-                a href="/logout" Logout
+        - if session[:user] == true
+            nav
+                h2 iForum
+                .links
+                    a href="" Home
+                    a href="" My profile
+                    a href="" Cat 1
+                    a href="" Cat 2
+                    a href="" Cat 3
+                .budgetfix
+                    a href="/logout" Logout
         .content
-            header
-                p #{session[:nickname]}
-                img src="" alt=""/
-                form action="" method=""
-                    input type="text" placeholder="Search"
-                    input type="submit" value="Go"
+            -if session[:user] == true
+                header
+                    p #{session[:nickname]}
+                    img src="" alt=""/
+                    form action="" method=""
+                        input type="text" placeholder="Search"
+                        input type="submit" value="Go"
             section
                 ==yield
