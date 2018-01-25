@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+html lang="en"
+    head
+        meta charset="UTF-8"/
+        meta name="viewport" content="width=device-width, initial-scale=1.0"/
+        meta http-equiv="X-UA-Compatible" content="ie=edge"/
+        link rel="stylesheet" href="/iforumcss.css"
+        title iForum
+    body
+        nav
+            h2 iForum
+            .links
+                a href="" Home
+                a href="" My profile
+                a href="" Cat 1
+                a href="" Cat 2
+                a href="" Cat 3
+            .budgetfix
+                a href="/logout" Logout
+        .content
+            header
+                p #{session[:nickname]}
+                img src="" alt=""/
+                form action="" method=""
+                    input type="text" placeholder="Search"
+                    input type="submit" value="Go"
+            section
+                ==yield
