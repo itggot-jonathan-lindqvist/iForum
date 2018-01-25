@@ -51,9 +51,20 @@ class App < Sinatra::Base
 	end
 
 	get '/getadminpowers' do
-		
+		slim(:getadminpowers)
 	end
 
+	post '/getadminpowers' do
+		if params[:password] == "katter"
+			username = params[:username]
+			db = SQLite3::Database.new('iForumDB.sqlite')
+			db.execute("UPDATE users SET admin_user_id = 1 WHERE username=?",[username])
+			redirect('/getadminpowers')
+		else 
+			p "NO!"
+		end
+
+	end
 
 
 end           
