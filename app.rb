@@ -38,6 +38,8 @@ class App < Sinatra::Base
 			session[:user] = true
 			nickname = db.execute("SELECT nickname FROM users WHERE username=?",[username])
 			session[:nickname] = nickname[0][0]
+			points = db.execute("SELECT points FROM users WHERE username=?",[username])
+			session[:points] = points[0][0]
 			redirect '/'
 		else
 			redirect '/error'

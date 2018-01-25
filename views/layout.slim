@@ -21,7 +21,7 @@ html lang="en"
         .content
             -if session[:user] == true
                 header
-                    p #{session[:nickname]}
+                    p #{session[:nickname]} #{session[:points]}
                     img src="" alt=""/
                     form action="" method=""
                         input type="text" placeholder="Search"
