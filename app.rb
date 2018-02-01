@@ -30,6 +30,7 @@ class App < Sinatra::Base
 		db = SQLite3::Database.new('iForumDB.sqlite')
 		username = params[:username]
 		password = params[:password]
+		session[:username] = username
 		check = db.execute("SELECT password FROM users WHERE username=?",[username])
 		p check
 		crypt = BCrypt::Password.new(check[0][0])
@@ -70,6 +71,13 @@ class App < Sinatra::Base
 	get '/post' do
 		slim(:post)
 	end
-
+	post '/post' do
+		db = SQLite3::Database.new('iForumDB.sqlite')
+		content = params[:content]
+		title = params[:title]
+		user_id = db.execute("SELECT id FROM users WHERE username=?",[session[:username]])
+		db.execute("INSERT INTO posts(user_id, points, content, title) VALUES(?,?,?,?)",[user_id, 0, content, title])
+		redirect '/'
+	end
 
 end           
