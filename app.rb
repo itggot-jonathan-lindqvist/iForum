@@ -67,6 +67,9 @@ class App < Sinatra::Base
 		end
 
 	end
+	get '/post' do
+		slim(:post)
+	end
 
 
 end           
