@@ -16,6 +16,15 @@ nav{
     background-color: red;
     padding-left: 20px;
     padding-right: 20px;
+    color: white;
+    text-decoration: none;
+
+}
+
+a{
+    color:white;
+    text-decoration: none;
+    margin-bottom: 15px;
 }
 
 .links{
@@ -67,6 +76,14 @@ section{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+}
+
+.adminlink{
+    color: black;
+}
+
+.errortext{
+    color: red;
 }
 
 input{

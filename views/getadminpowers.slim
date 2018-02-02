@@ -1,7 +1,11 @@
-h1 GIVE ME THE POWER :^)
-form action="/getadminpowers" method="POST"
-    input type="text" placeholder="Username" name="username"
-    input type="password" placeholder="Password" name="password"
-    input type="submit"  value="UNLIMITED POWER"
+.coloumfix
+    h1 GIVE ME THE POWER :^)
+    form action="/getadminpowers" method="POST"
+        input type="text" placeholder="Username" name="username"
+        input type="password" placeholder="Password" name="password"
+        input type="submit"  value="UNLIMITED POWER"
+    - if session[:adminerror] == true
+        .errortext
+            p "DU ÄR INGEN RIKTIG ADMIN!"
 
-a href="/" GO back :D
+    a  class="adminlink" href="/" GO back :D
