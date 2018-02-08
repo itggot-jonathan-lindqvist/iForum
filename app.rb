@@ -78,6 +78,7 @@ class App < Sinatra::Base
 	get '/post' do
 		slim(:post)
 	end
+
 	post '/post' do
 		db = SQLite3::Database.new('iForumDB.sqlite')
 		content = params[:content]
@@ -85,6 +86,23 @@ class App < Sinatra::Base
 		user_id = db.execute("SELECT id FROM users WHERE username=?",[session[:username]])
 		db.execute("INSERT INTO posts(user_id, points, content, title) VALUES(?,?,?,?)",[user_id, 0, content, title])
 		redirect '/'
+	end
+
+	get '/myprofile' do 
+		if session[:user] == false
+			redirect('/')
+		else
+			db = SQLite3::Database.new('iForumDB.sqlite')
+			username = session[:username]
+			info = db.execute("SELECT * FROM users WHERE username=?",[username])
+			info = info[0]
+			username = info[1]
+			nickname = info[2]
+			password = info[3]
+			points = info[4]
+			
+			slim(:myprofile, locals:{ username:username, nickname:nickname, points:points} )
+		end
 	end
 
 end           
