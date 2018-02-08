@@ -2,6 +2,11 @@ class App < Sinatra::Base
 	enable:sessions
 
 	get '/' do
+		db = SQLite3::Database.new('iForumDB.sqlite')
+		min = 1
+		max = db.execute("SELECT COUNT(*) FROM posts")
+		rand_post = rand(min...max)
+		print rand_post
 		slim(:index)
 	end
 
@@ -83,8 +88,10 @@ class App < Sinatra::Base
 		db = SQLite3::Database.new('iForumDB.sqlite')
 		content = params[:content]
 		title = params[:title]
+		cat = params[:cat]
+		cat_id = db.execute("SELECT id FROM category WHERE name=?",[cat])
 		user_id = db.execute("SELECT id FROM users WHERE username=?",[session[:username]])
-		db.execute("INSERT INTO posts(user_id, points, content, title) VALUES(?,?,?,?)",[user_id, 0, content, title])
+		db.execute("INSERT INTO posts(user_id, points, content, Title, cat_id) VALUES(?,?,?,?,?)",[user_id, 0, content, title, cat_id])
 		redirect '/'
 	end
 
